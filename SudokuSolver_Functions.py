@@ -57,35 +57,42 @@ def domaine(tab):
         #print(smallDomain)
     return tab;
     
-def check(grille):
+def isCorrect(grille2):
     """
         Regarde si la grille fournie respecte les règles du Sudoku
+        Retourne True/False
     """
-    res = True
-    # On test chaque ligne
-    for L in range(0, 81, 9):
-        small = [1,2,3,4,5,6,7,8,9]
-        for C in range(9):
-            if grille[C+L] not in small:
+    grille = grille2.copy()
+    # On vérifie que la case ne contient qu'un élément
+    for i in range(9):
+        for j in range(9):
+            if len(grille[j + i*9]) == 1:
+                res = True
+            else:
+                res = False
+    # On enlève les tableaux de la grille
+    for i in range(81):
+        grille[i] = grille[i][0]
+        
+    # On test chaque ligne et chaque colonne ensemble ATTENTION REPETITION, NOT DRY
+    for i in range(9):
+        dC = [1,2,3,4,5,6,7,8,9]
+        dL = [1,2,3,4,5,6,7,8,9]
+        for j in range(9):
+            # Test de la ligne
+            if grille[j + 9*i] not in dL:
                 res = False
                 break
             else:
-                small.remove(grille[C+L])
+                dL.remove(grille[j + 9*i])
+            # Test de la colonne
+            if grille[i + 9*j] not in dC:
+                res = False
+                break
+            else:
+                dC.remove(grille[i + 9*j])
         if res == False:
             break
-            
-    # On test la colonne
-    if res == True:
-        for C in range(9):
-            small = [1,2,3,4,5,6,7,8,9]
-            for L in range(C, C+81, 9):
-                if grille[C+L] not in small:
-                    res = False
-                    break
-                else:
-                    small.remove(grille[C+L])
-            if res == False:
-                break
     
     # On test le carré
     sum = [0,1,2,9,10,11,18,19,20]
@@ -113,3 +120,29 @@ def randomSolving(grille):
     for i in range(81):
         grille2[i] = random.choice(grille2[i])
     return grille2
+    
+def isFull(grille):
+    """
+        Regarde si la grille comporte 81 nombres, retourne True/False
+        ATTENTION : ne vérifie pas qu'elle est correct, utiliser "check"
+    """
+    b = 0
+    for i in range(9):
+        for j in range(9):
+            if len(grille[i + 9*j]) == 1:
+                b += 1
+    if b == 81:
+        return True
+    else:
+        return False
+            
+def printS(grille):
+    """
+        Affiche une grille donnée
+    """
+    a = ""
+    for i in range(9):
+        a = ""
+        for j in range(9):
+            a = a + str(grille[j + 9*i])
+        print(a)
