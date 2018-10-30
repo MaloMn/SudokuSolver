@@ -62,14 +62,14 @@ def isCorrect(grille2):
         Regarde si la grille fournie respecte les règles du Sudoku
         Retourne True/False
     """
+    res = True
     grille = grille2.copy()
     # On vérifie que la case ne contient qu'un élément
     for i in range(9):
         for j in range(9):
-            if len(grille[j + i*9]) == 1:
-                res = True
-            else:
+            if not (len(grille[j + i*9]) == 1):
                 res = False
+                
     # On enlève les tableaux de la grille
     for i in range(81):
         grille[i] = grille[i][0]
