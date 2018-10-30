@@ -2,7 +2,11 @@
 
 This is a sudoku solver. It solves a given sudoku by trying each possibility until one works.
 
-[5][3][ ] [ ][7][ ] [ ][ ][ ]
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+
+|5][3][ ] [ ][7][ ] [ ][ ][ ]
 [6][ ][ ] [1][9][5] [ ][ ][ ]
 [ ][9][8] [ ][ ][ ] [ ][6][ ]
 
