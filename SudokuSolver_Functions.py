@@ -140,9 +140,16 @@ def printS(grille):
     """
         Affiche une grille donnée
     """
+    b = 0
+    c = 0
     a = ""
     for i in range(9):
         a = ""
+        if i % 3 == 0:
+            print(" ")
         for j in range(9):
+            if j % 3 == 0:
+                a = a + " "
             a = a + str(grille[j + 9*i])
         print(a)
+    print(" ")
