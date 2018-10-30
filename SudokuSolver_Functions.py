@@ -1,3 +1,5 @@
+import random
+
 def eraseIf(liste, element):
     """
         Efface un element d'une liste si la liste le contient

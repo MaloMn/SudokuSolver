@@ -1,6 +1,6 @@
 import os
 import random
-import SudokuSolver_Functions
+from SudokuSolver_Functions import *
     
 chaineSudoku = ''
 sudoku = []
@@ -38,23 +38,3 @@ else:
     print('No solutions')
 
 os.system("pause")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
