@@ -36,5 +36,5 @@ For the moment, __you have to write the tab in the following manner for the prog
 
 ## What's coming next ?
   * Try to program a more intelligent way of solving it by doing as follow :
-   * Each line, column and squared is checked to see if a number of a domain only appears once. If such a number is found, it replaces the previous array.
-   * Then, we write in an another array the tree of the possibilties and we test each of them one by one. Before starting, we launch a short test to indicate the user the maximum time it could take to solve the Sudoku (time of checking each possibility)
+    * Each line, column and squared is checked to see if a number of a domain only appears once. If such a number is found, it replaces the previous array.
+    * Then, we write in an another array the tree of the possibilties and we test each of them one by one. Before starting, we launch a short test to indicate the user the maximum time it could take to solve the Sudoku (time of checking each possibility)
