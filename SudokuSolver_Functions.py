@@ -1,5 +1,15 @@
 import random
 
+def inputSudoku():
+    print("How to write your Sudoku Table:")
+    print(" - Each empty cell is replaced by a zero")
+    print(" - Each line is written next to the previous one")
+    print(" - There isn't any spacing whatsoever")
+    chaine = str(input("Please enter your Sudoku table: "));
+    while len(chaine) != 81 or str(int(chaine) != chaine):
+        chaine = str(input("You made a mistake, please try again:"));
+    return chaine    
+
 def eraseIf(liste, element):
     """
         Efface un element d'une liste si la liste le contient
@@ -21,7 +31,7 @@ def domaine(tab):
         Crée les domaines de chaque case de la grille
     """
     tab2 = tab.copy() # On copie le tableau donné pour s'en servir de référence (tab2), tab sera modifié
-    
+
     for i in range(len(tab2)):
         smallDomain = []
         # On s'arrête lorsque la case du Sudoku est indiquée vide par un zéro
@@ -29,12 +39,12 @@ def domaine(tab):
             smallDomain = [1,2,3,4,5,6,7,8,9] # Au début, chaque nombre est possible. On va enlever progressivement les nombres qui sont déjà compris
             C = i % 9
             L = i // 9
-            
+
             # On test la ligne (RANGE FONCTIONNE)
             for j in range(9*L, 9*L + 9):
                 smallDomain = eraseIf(smallDomain, tab2[j])
                 #print('j = ', j, 'case = ',tab2[j])
-                
+
             #print('Après ligne : ', smallDomain)
             # On test la colonne (RANGE FONCTIONNE)
             for j in range(C, C + 81, 9):
@@ -51,12 +61,12 @@ def domaine(tab):
         else:
             # Si la grille contient déjà un nombre, on le converti en liste d'un élément.
             smallDomain.append(tab2[i])
-            
+
         # On ajoute finalement le domaine modifié comme nouveau nombre de la grille
         tab[i] = smallDomain
         #print(smallDomain)
     return tab;
-    
+
 def isCorrect(grille2):
     """
         Regarde si la grille fournie respecte les règles du Sudoku
@@ -69,11 +79,11 @@ def isCorrect(grille2):
         for j in range(9):
             if not (len(grille[j + i*9]) == 1):
                 res = False
-                
+
     # On enlève les tableaux de la grille
     for i in range(81):
         grille[i] = grille[i][0]
-        
+
     # On test chaque ligne et chaque colonne ensemble ATTENTION REPETITION, NOT DRY
     for i in range(9):
         dC = [1,2,3,4,5,6,7,8,9]
@@ -93,7 +103,7 @@ def isCorrect(grille2):
                 dC.remove(grille[i + 9*j])
         if res == False:
             break
-    
+
     # On test le carré
     sum = [0,1,2,9,10,11,18,19,20]
     for L in range(0,9,3):
@@ -109,7 +119,7 @@ def isCorrect(grille2):
                 break
         if res == False:
             break
-            
+
     return res
 
 def randomSolving(grille):
@@ -120,7 +130,7 @@ def randomSolving(grille):
     for i in range(81):
         grille2[i] = random.choice(grille2[i])
     return grille2
-    
+
 def isFull(grille):
     """
         Regarde si la grille comporte 81 nombres, retourne True/False
@@ -135,7 +145,7 @@ def isFull(grille):
         return True
     else:
         return False
-            
+
 def printS(grille):
     """
         Affiche une grille donnée
