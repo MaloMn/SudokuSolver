@@ -1,18 +1,18 @@
+# -*- coding: utf-8 -*
 import os
 import random
 from SudokuSolver_Functions import *
-    
+
 while 1 == 1:
     chaineSudoku = ''
     sudoku = []
     smallDomain = []
     res = True
 
-    # Demande à l'utilisateur de la chaîne de caractère représentant la grille de sudoku
-    chaineSudoku = str(input('Entrez la grille de sudoku à résoudre (écrivez les chiffres de la grille ligne par ligne, sans espace, en mettant un zéro si la cas est vide) : '));
-    while len(chaineSudoku) != 81:
-        chaineSudoku = str(input('Vous avez commis une erreur. Merci de réessayer (écrivez les chiffres de la grille ligne par ligne, sans espace, en mettant un zéro si la cas est vide) : '));
-        
+    # Demande à l'utilisateur de la chaîne de caractère représentant
+    # la grille de sudoku
+    chaineSudoku = inputSudoku()
+
     steps = int(input("Entrez le nombre d'étapes souhaitées : "))
 
     # Transformation de la chaîne de caractère en tableau
@@ -30,7 +30,7 @@ while 1 == 1:
         #print(i)
         solution = randomSolving(sudoku)
         i = i+1
-        
+
     if isCorrect(sudoku) and isFull(sudoku):
         printS(sudoku)
     else:

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*
 import random
 
 def inputSudoku():
@@ -7,8 +8,8 @@ def inputSudoku():
     print(" - There isn't any spacing whatsoever")
     chaine = str(input("Please enter your Sudoku table: "));
     while len(chaine) != 81 or str(int(chaine) != chaine):
-        chaine = str(input("You made a mistake, please try again:"));
-    return chaine    
+        chaine = str(input("You made a mistake, please try again: "));
+    return chaine
 
 def eraseIf(liste, element):
     """
