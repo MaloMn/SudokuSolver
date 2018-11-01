@@ -2,14 +2,19 @@
 import random
 
 def inputSudoku():
+    """
+        Enonce les règles pour entrer la grille de Sudoku
+        Demande à l'utilisateur d'entrer la grille
+        Vérifie que la grille fait bien 81 caractères
+    """
+    # WE SHOULD CHECK THAT THERE ARE ONLY NUMBERS (with try and except?)
     print("How to write your Sudoku Table:")
     print(" - Each empty cell is replaced by a zero")
     print(" - Each line is written next to the previous one")
     print(" - There isn't any spacing whatsoever")
-    chaine = str(input("Please enter your Sudoku table: "));
-    while len(chaine) != 81 or str(int(chaine) != chaine):
-        chaine = str(input("You made a mistake, please try again: "));
-    return chaine
+    chaine = str(input("Please enter your Sudoku table: "))
+    while len(chaine) != 81:
+        chaine = str(input("You made a mistake, please try again: "))
 
 def eraseIf(liste, element):
     """
