@@ -27,14 +27,18 @@ def eraseIf(liste, element):
 def getFirstSquare(A):
     """
         Entrée : coordonnée x ou y d'un point donné
-        Donne la coordonné (x ou y en fonction de l'entrée) du point haut-gauche du carré dans lequel est le nombre donné
+        Donne la coordonné (x ou y en fonction de l'entrée) du point
+        haut-gauche du carré dans lequel est le nombre donné
     """
     A = A - A%3
     return A
 
 def domaine(tab):
     """
-        Crée les domaines de chaque case de la grille
+        Crée les domaines de chaque case de la grille.
+        Prends en compte les listes contenant un zéro, et ajoute les nombres
+        possible en prenant en compte les nombres (représenté par des listes de longueur 1)
+        sur chaque ligne, colonne et carré.
     """
     tab2 = tab.copy() # On copie le tableau donné pour s'en servir de référence (tab2), tab sera modifié
 
@@ -47,14 +51,19 @@ def domaine(tab):
             L = i // 9
 
             # On test la ligne (RANGE FONCTIONNE)
+            # On compare la liste aves les nombres de chaque ligne
+            # représentés par des listes de longueur 1 pour que les listes
+            # des domaines précédents ([1,2,3]) ne soient pas pris en compte
             for j in range(9*L, 9*L + 9):
-                smallDomain = eraseIf(smallDomain, tab2[j])
+                if len(tab2[j]) == 1:
+                    smallDomain = eraseIf(smallDomain, tab2[j])
                 #print('j = ', j, 'case = ',tab2[j])
 
             #print('Après ligne : ', smallDomain)
-            # On test la colonne (RANGE FONCTIONNE)
+            # On test la colonne CONDITION NOT WORKING
             for j in range(C, C + 81, 9):
-                smallDomain = eraseIf(smallDomain, tab2[j])
+                if type(tab2[j]) == 'int' or len(tab2[j]) == 1:
+                    smallDomain = eraseIf(smallDomain, tab2[j])
             #print('Après colonne : ', smallDomain)
             # On test le carré : on part du coin haut-gauche, et on va ligne par ligne [FONCTIONNE]
             C = getFirstSquare(C)
@@ -62,7 +71,8 @@ def domaine(tab):
 
             sum = [0,1,2,9,10,11,18,19,20]
             for j in sum:
-                smallDomain = eraseIf(smallDomain, tab2[C + 9*L + j])
+                if len(C + 9*L + j) == 1:
+                    smallDomain = eraseIf(smallDomain, tab2[C + 9*L + j])
             #print('Après carré : ', smallDomain)
         else:
             # Si la grille contient déjà un nombre, on le converti en liste d'un élément.
