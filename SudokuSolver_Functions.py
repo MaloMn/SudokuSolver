@@ -83,6 +83,12 @@ def domaine(tab):
         #print(smallDomain)
     return tab;
 
+#try:
+#   if len(tab2[j]) == 1:
+#       smallDomain = eraseIf(smallDomain, tab2[j][0])
+#except TypeError:
+#   smallDomain = eraseIf(smallDomain, tab2[j])
+
 def isCorrect(grille2):
     """
         Regarde si la grille fournie respecte les règles du Sudoku
