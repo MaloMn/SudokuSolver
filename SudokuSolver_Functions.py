@@ -52,19 +52,19 @@ def getFirstSquare(A):
     A = A - A%3
     return A
 
-def domaine(tab):
+def domaine(tab2):
     """
         Crée les domaines de chaque case de la grille.
         Prends en compte les listes contenant un zéro, et y ajoute les nombres possibles
         possible en prenant en compte les nombres (représenté par des listes de longueur 1)
         sur chaque ligne, colonne et carré.
     """
-    tab2 = tab.copy() # On copie le tableau donné pour s'en servir de référence (tab2), !!! tab sera modifié !!!
-
+    # Référence : tab2
+    tab = []
     for i in range(81):
         smallDomain = []
         # On s'arrête lorsque la case du Sudoku est indiquée vide par un zéro
-        if tab[i][0] == 0 or len(tab[i]) > 1:
+        if tab2[i][0] == 0 or len(tab2[i]) > 1:
             #print("La case contient {} et a une longueur de {}".format(tab[i][0], len(tab[i])))
             smallDomain = [1,2,3,4,5,6,7,8,9] # Au début, chaque nombre est possible
             # On définit la colonne et la ligne de la case i
@@ -77,12 +77,12 @@ def domaine(tab):
             # des domaines précédents ([1,2,3]) ne soient pas pris en compte
             for j in range(9*L, 9*L + 9):
                 if len(tab2[j]) == 1: # On ne compare que avec les tableaux contenant un unique nombre
-                    smallDomain = eraseIf(smallDomain, tab2[j])
+                    smallDomain = eraseIf(smallDomain, tab2[j][0])
                     
             # On test la colonne CONDITION NOT WORKING
             for j in range(C, C + 81, 9):
                 if len(tab2[j]) == 1:
-                    smallDomain = eraseIf(smallDomain, tab2[j])
+                    smallDomain = eraseIf(smallDomain, tab2[j][0])
             #print('Après colonne : ', smallDomain)
             # On test le carré : on part du coin haut-gauche, et on va ligne par ligne [FONCTIONNE]
             C = getFirstSquare(C)
@@ -91,12 +91,13 @@ def domaine(tab):
             sum = [0,1,2,9,10,11,18,19,20]
             for j in sum:
                 if len(tab2[C + 9*L + j]) == 1:
-                    smallDomain = eraseIf(smallDomain, tab2[C + 9*L + j])
+                    smallDomain = eraseIf(smallDomain, tab2[C + 9*L + j][0])
             #print('Après carré : ', smallDomain)
 
-        # On ajoute finalement le domaine modifié comme nouveau nombre de la grille
-        if smallDomain != []: # smallDomain vide <=> la case inspecté n'en valait pas la peine
-            tab[i] = smallDomain
+            # On ajoute finalement le domaine modifié comme nouveau nombre de la grille
+            tab.append(smallDomain)
+        else:
+            tab.append(tab2[i])
     return tab;
 
 def isCorrect(grille2):
