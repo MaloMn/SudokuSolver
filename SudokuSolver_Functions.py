@@ -5,16 +5,32 @@ def inputSudoku():
     """
         Enonce les règles pour entrer la grille de Sudoku
         Demande à l'utilisateur d'entrer la grille
-        Vérifie que la grille fait bien 81 caractères
+        Vérifie que la grille fait bien 81 nombres
+        String to list of arrays
     """
-    # WE SHOULD CHECK THAT THERE ARE ONLY NUMBERS (with try and except?)
+    # We tell the user the rules of the games
     print("How to write your Sudoku Table:")
     print(" - Each empty cell is replaced by a zero")
     print(" - Each line is written next to the previous one")
     print(" - There isn't any spacing whatsoever")
-    chaine = str(input("Please enter your Sudoku table: "))
-    while len(chaine) != 81:
-        chaine = str(input("You made a mistake, please try again: "))
+    # We check that there are 81 numbers in "chaine"
+    while True:
+        try:
+            chaine = str(input("Please enter your Sudoku table: "))
+        except ValueError:
+            print("Sorry I didn't catch that.")
+            continue
+        if len(chaine) != 81:
+            print("There has to be exactly 81 numbers.")
+            continue
+        if not chaine.isdigit():
+            print("Has a Sudoku table ever contained anything else than numbers?")
+            continue
+        else:
+            break
+            
+    for i in range(len(chaine)):
+        sudoku.append(int(chaine[i])) # On transforme les caractères en nombres
 
 def eraseIf(liste, element):
     """

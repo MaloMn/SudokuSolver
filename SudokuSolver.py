@@ -12,22 +12,18 @@ while 1 == 1:
     # Demande à l'utilisateur de la chaîne de caractère représentant
     # la grille de sudoku
     chaineSudoku = inputSudoku()
-
-    steps = int(input("Entrez le nombre d'étapes souhaitées : "))
-
-    # Transformation de la chaîne de caractère en tableau
-    for i in range(len(chaineSudoku)):
-        sudoku.append(int(chaineSudoku[i])) # On transforme les caractères en nombres
-
-    # On calcule les domaines de chacune des cases
-    sudoku = domaine(sudoku)
+    
     ##############################
     ### RESOLUTION PAR DOMAINE ###
     ##############################
+    # On calcule les domaines de chacune des cases
+    sudoku = domaine(sudoku)
     
     ############################
     ### RESOLUTION ALEATOIRE ###
     ############################
+    steps = int(input("Entrez le nombre d'étapes souhaitées : "))
+    
     solution = randomSolving(sudoku)
     i = 0
 
