@@ -35,7 +35,8 @@ For the moment, __you have to write the tab in the following manner for the prog
  * *452391876318675294679428315831564729245987163967213548796852431183749652524136987*
  * *608091400009038512213507908004309807001862054302475090820154709945723001137086245*
  * *123456789000000000000000000000000000000000000000000000000000000000000000000000000*
-
+ * *530070000600195000098000060800060003400803001700020006060000280000419005000080075* <-- Currently not working for this one
+ 
 ## What's coming next ?
   * Try to program a more intelligent way of solving it by doing as follow :
     * Each line, column and squared is checked to see if a number of a domain only appears once. If such a number is found, it replaces the previous array.

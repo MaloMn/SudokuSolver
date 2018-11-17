@@ -13,11 +13,15 @@ while True:
     # On calcule les domaines de chacune des cases
     while True:
         sudokuBis = domaine(sudoku)
-        printS(sudokuBis)
         if sudokuBis == sudoku:
             # On s'arrête dès que "domain" ne change rien
             break
         sudoku = sudokuBis.copy()
+    printS(sudoku)
+    if isCorrect(sudoku):
+        print("This one was easy, you could have done it!")
+    else:
+        print("This one is harder than I thought... Would you mind giving me more time ? (YES / NO)")
     
     ############################
     ### RESOLUTION ALEATOIRE ###
