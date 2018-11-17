@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*
-import os
+
 import random
 from SudokuSolver_Functions import *
 
@@ -21,8 +21,13 @@ while 1 == 1:
 
     # On calcule les domaines de chacune des cases
     sudoku = domaine(sudoku)
-
-    # RESOLUTION ALEATOIRE
+    ##############################
+    ### RESOLUTION PAR DOMAINE ###
+    ##############################
+    
+    ############################
+    ### RESOLUTION ALEATOIRE ###
+    ############################
     solution = randomSolving(sudoku)
     i = 0
 
@@ -35,5 +40,4 @@ while 1 == 1:
         printS(sudoku)
     else:
         print('No solutions')
-
-    os.system("pause")
+    ### END OF RESOLUTION ALEATOIRE ###
