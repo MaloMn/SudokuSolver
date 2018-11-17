@@ -22,7 +22,7 @@ def inputSudoku():
             print("Sorry I didn't catch that.")
             continue
         if len(chaine) != 81:
-            print("There has to be exactly 81 numbers.")
+            print("You entered {} numbers. A Sudoku table contains 81 numbers.".format(len(chaine)))
             continue
         if not chaine.isdigit():
             print("Has a Sudoku table ever contained anything else than numbers?")
@@ -65,6 +65,7 @@ def domaine(tab):
         smallDomain = []
         # On s'arrête lorsque la case du Sudoku est indiquée vide par un zéro
         if tab[i][0] == 0 or len(tab[i]) > 1:
+            #print("La case contient {} et a une longueur de {}".format(tab[i][0], len(tab[i])))
             smallDomain = [1,2,3,4,5,6,7,8,9] # Au début, chaque nombre est possible
             # On définit la colonne et la ligne de la case i
             C = i % 9
@@ -94,9 +95,8 @@ def domaine(tab):
             #print('Après carré : ', smallDomain)
 
         # On ajoute finalement le domaine modifié comme nouveau nombre de la grille
-        tab[i] = smallDomain
-        if smallDomain == []:
-            print("A domain is blank, there's a problem.")
+        if smallDomain != []: # smallDomain vide <=> la case inspecté n'en valait pas la peine
+            tab[i] = smallDomain
     return tab;
 
 def isCorrect(grille2):
