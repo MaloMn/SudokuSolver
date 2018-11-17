@@ -95,8 +95,8 @@ def domaine(tab):
 
         # On ajoute finalement le domaine modifié comme nouveau nombre de la grille
         tab[i] = smallDomain
-        if smallDomain = []:
-            print("A domain is blank, there's is a problem.")
+        if smallDomain == []:
+            print("A domain is blank, there's a problem.")
     return tab;
 
 def isCorrect(grille2):
