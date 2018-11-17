@@ -8,6 +8,7 @@ def inputSudoku():
         Vérifie que la grille fait bien 81 nombres
         String to list of arrays
     """
+    tab = []
     # We tell the user the rules of the games
     print("How to write your Sudoku Table:")
     print(" - Each empty cell is replaced by a zero")
@@ -29,8 +30,10 @@ def inputSudoku():
         else:
             break
             
+    # On met dans tab les nombres inclus dans des listes
     for i in range(len(chaine)):
-        sudoku.append(int(chaine[i])) # On transforme les caractères en nombres
+        tab.append([int(chaine[i])])
+    return tab
 
 def eraseIf(liste, element):
     """
@@ -52,17 +55,18 @@ def getFirstSquare(A):
 def domaine(tab):
     """
         Crée les domaines de chaque case de la grille.
-        Prends en compte les listes contenant un zéro, et ajoute les nombres
+        Prends en compte les listes contenant un zéro, et y ajoute les nombres possibles
         possible en prenant en compte les nombres (représenté par des listes de longueur 1)
         sur chaque ligne, colonne et carré.
     """
-    tab2 = tab.copy() # On copie le tableau donné pour s'en servir de référence (tab2), tab sera modifié
+    tab2 = tab.copy() # On copie le tableau donné pour s'en servir de référence (tab2), !!! tab sera modifié !!!
 
-    for i in range(len(tab2)):
+    for i in range(81):
         smallDomain = []
         # On s'arrête lorsque la case du Sudoku est indiquée vide par un zéro
-        if tab[i] == 0:
-            smallDomain = [1,2,3,4,5,6,7,8,9] # Au début, chaque nombre est possible. On va enlever progressivement les nombres qui sont déjà compris
+        if tab[i][0] == 0 or len(tab[i]) > 1:
+            smallDomain = [1,2,3,4,5,6,7,8,9] # Au début, chaque nombre est possible
+            # On définit la colonne et la ligne de la case i
             C = i % 9
             L = i // 9
 
@@ -71,14 +75,12 @@ def domaine(tab):
             # représentés par des listes de longueur 1 pour que les listes
             # des domaines précédents ([1,2,3]) ne soient pas pris en compte
             for j in range(9*L, 9*L + 9):
-                if len(tab2[j]) == 1:
+                if len(tab2[j]) == 1: # On ne compare que avec les tableaux contenant un unique nombre
                     smallDomain = eraseIf(smallDomain, tab2[j])
-                #print('j = ', j, 'case = ',tab2[j])
-
-            #print('Après ligne : ', smallDomain)
+                    
             # On test la colonne CONDITION NOT WORKING
             for j in range(C, C + 81, 9):
-                if type(tab2[j]) == 'int' or len(tab2[j]) == 1:
+                if len(tab2[j]) == 1:
                     smallDomain = eraseIf(smallDomain, tab2[j])
             #print('Après colonne : ', smallDomain)
             # On test le carré : on part du coin haut-gauche, et on va ligne par ligne [FONCTIONNE]
@@ -87,23 +89,15 @@ def domaine(tab):
 
             sum = [0,1,2,9,10,11,18,19,20]
             for j in sum:
-                if len(C + 9*L + j) == 1:
+                if len(tab2[C + 9*L + j]) == 1:
                     smallDomain = eraseIf(smallDomain, tab2[C + 9*L + j])
             #print('Après carré : ', smallDomain)
-        else:
-            # Si la grille contient déjà un nombre, on le converti en liste d'un élément.
-            smallDomain.append(tab2[i])
 
         # On ajoute finalement le domaine modifié comme nouveau nombre de la grille
         tab[i] = smallDomain
-        #print(smallDomain)
+        if smallDomain = []:
+            print("A domain is blank, there's is a problem.")
     return tab;
-
-#try:
-#   if len(tab2[j]) == 1:
-#       smallDomain = eraseIf(smallDomain, tab2[j][0])
-#except TypeError:
-#   smallDomain = eraseIf(smallDomain, tab2[j])
 
 def isCorrect(grille2):
     """

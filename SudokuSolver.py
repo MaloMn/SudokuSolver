@@ -3,15 +3,9 @@
 import random
 from SudokuSolver_Functions import *
 
-while 1 == 1:
-    chaineSudoku = ''
-    sudoku = []
-    smallDomain = []
-    res = True
-
-    # Demande à l'utilisateur de la chaîne de caractère représentant
-    # la grille de sudoku
-    chaineSudoku = inputSudoku()
+while True:
+    sudoku = inputSudoku()
+    printS(sudoku)
     
     ##############################
     ### RESOLUTION PAR DOMAINE ###
