@@ -34,12 +34,16 @@ while True:
     
     solution = randomSolving(sudoku)
     i = 0
-
+    percent = 0
     while not isCorrect(sudoku) and not isFull(sudoku) and i < steps:
         #print(i)
         solution = randomSolving(sudoku)
         i = i+1
-
+        # On affiche l'avancé de la boucle
+        percent = int(100*i/steps)
+        if int(100*i/steps) > percent:
+            print("{} %".format(percent))
+            
     if isCorrect(sudoku) and isFull(sudoku):
         printS(sudoku)
     else:
