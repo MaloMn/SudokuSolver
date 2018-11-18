@@ -6,7 +6,8 @@ from SudokuSolver_Functions import *
 while True:
     sudoku = inputSudoku()
     printS(sudoku)
-    
+    #if not isCorrect:
+        #print("Sorry, this table isn't right")
     ##############################
     ### RESOLUTION PAR DOMAINE ###
     ##############################
@@ -14,10 +15,11 @@ while True:
     while True:
         sudokuBis = domaine(sudoku)
         if sudokuBis == sudoku:
-            # On s'arrête dès que "domain" ne change rien
+            # On s'arrête dès que "domaine" ne change rien
             break
         sudoku = sudokuBis.copy()
     printS(sudoku)
+    
     if isCorrect(sudoku):
         print("This one was easy, you could have done it!")
     else:
