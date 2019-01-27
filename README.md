@@ -1,6 +1,6 @@
 # SudokuSolver
 
-This is a Sudoku solver. It solves a given Sudoku by trying each possibility until one works.
+This is a Sudoku solver.
 
 | | | | | | | | | |
 |-|-|-|-|-|-|-|-|-|
