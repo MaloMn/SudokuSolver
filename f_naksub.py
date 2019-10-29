@@ -40,8 +40,8 @@ def naked_subset(p):
         for j in range(0, 9, 3):
             # We spot any subset
             nb = subset(poss, square(i, j))
-            if len(nb) > 0:
-                print(nb, i, j)
+            # if len(nb) > 0:
+            #     print(nb, i, j)
             # We remove the numbers in the subset from other positions
             for a in nb:
                 poss = sub_nb(poss, square(i, j), a)
@@ -49,8 +49,8 @@ def naked_subset(p):
     # For each line
     for i in range(9):
         nb = subset(poss, line(i, 0))
-        if len(nb) > 0:
-            print(nb, i, 0)
+        # if len(nb) > 0:
+        #     print(nb, i, 0)
         # We remove the numbers in the subset from other positions
         for a in nb:
             poss = sub_nb(poss, line(i, 0), a)
@@ -58,8 +58,8 @@ def naked_subset(p):
     # For each column
     for j in range(9):
         nb = subset(poss, column(0, j))
-        if len(nb) > 0:
-            print(nb, 0, j)
+        # if len(nb) > 0:
+        #     print(nb, 0, j)
         # We remove the numbers in the subset from other positions
         for a in nb:
             poss = sub_nb(poss, column(0, j), a)
