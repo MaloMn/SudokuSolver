@@ -1,18 +1,19 @@
 from functions import *
 
-sudoku = '002840005500001004004005006030000010000504000090000080700200900200900008900086300'
+sudoku = '002080400000409000093000210940000083000578000700040001026000390000605000010000050'
 
 sudoku = format_sudoku(sudoku)
 print(check(sudoku))
-poss = possibilities(sudoku)
-for i in range(100):
-    poss = possibilities(sudoku)
-    sudoku = sole_candidate(sudoku, poss)
 
-for i in range(20):
-    print('a')
+while 'before != sudoku':
+
+    before = deepcopy(sudoku)
     poss = possibilities(sudoku)
     poss = naked_subset(poss)
     sudoku = sole_candidate(sudoku, poss)
+    sudoku = unique_candidate(sudoku, poss)
+
+    if before == sudoku:
+        break
 
 P(sudoku)

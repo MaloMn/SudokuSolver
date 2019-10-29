@@ -122,7 +122,7 @@ def unique_candidate(s, poss):
     # For each square
     for i in range(0, 9, 3):
         for j in range(0, 9, 3):
-            occurences = make_list_uc(s, square(i, j))
+            occurences = make_list_uc(poss, square(i, j))
             for index, a in enumerate(occurences):
                 if a[0] == 1:
                     x, y = a[1]
@@ -130,7 +130,7 @@ def unique_candidate(s, poss):
 
     # For each line
     for i in range(9):
-        occurences = make_list_uc(s, line(i, 0))
+        occurences = make_list_uc(poss, line(i, 0))
         for index, a in enumerate(occurences):
             if a[0] == 1:
                 x, y = a[1]
@@ -138,7 +138,7 @@ def unique_candidate(s, poss):
 
     # For each column
     for j in range(9):
-        occurences = make_list_uc(s, line(0, j))
+        occurences = make_list_uc(poss, line(0, j))
         for index, a in enumerate(occurences):
             if a[0] == 1:
                 x, y = a[1]
