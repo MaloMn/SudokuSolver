@@ -1,6 +1,6 @@
 from functions import *
 
-sudoku = '900700500000910000640000900570040230000103000064080079009000024000098000008001007'
+sudoku = '002840005500001004004005006030000010000504000090000080700200900200900008900086300'
 
 sudoku = format_sudoku(sudoku)
 print(check(sudoku))
@@ -9,7 +9,7 @@ for i in range(100):
     poss = possibilities(sudoku)
     sudoku = sole_candidate(sudoku, poss)
 
-while check(sudoku) and not won(sudoku):
+for i in range(20):
     print('a')
     poss = possibilities(sudoku)
     poss = naked_subset(poss)

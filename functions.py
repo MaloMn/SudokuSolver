@@ -33,6 +33,12 @@ def gen():
 
 
 def check(s):
+    """
+    Checks whether the sudoku presents mistakes or not.
+    It doesn't need to be full to be tested.
+    :param s: sudoku to be tested
+    :return: True if the sudoku is ok, False if a mistake has been made solving the sudoku
+    """
     d = True
     for i, j in gen():
         nb_line = [s[x][y] for x, y in line(i, j) if s[x][y] != 0]
@@ -47,6 +53,11 @@ def check(s):
 
 
 def possibilities(s):
+    """
+    Stores in the poss array the possibles numbers for each empty cell.
+    :param s: sudoku
+    :return: poss array
+    """
     poss = deepcopy(s)
 
     for i in range(9):
@@ -64,6 +75,11 @@ def possibilities(s):
 
 
 def P(s):
+    """
+    Prints the sudoku as a square, so it is easily readable
+    :param s: sudoku
+    :return: nothing
+    """
     p = deepcopy(s)
     p = np.array(p)
     p = p.astype(str)
@@ -96,6 +112,12 @@ def make_list_uc(poss, c_list):
 
 
 def unique_candidate(s, poss):
+    """
+    If there is only one number in one section (line/column/square) in the possibilities, then it chooses that number.
+    :param s: sudoku
+    :param poss: output of possibilities function
+    :return: sudoku
+    """
     sudoku = deepcopy(s)
     # For each square
     for i in range(0, 9, 3):
@@ -135,10 +157,20 @@ def subset(poss, c_list):
     return out
 
 
+def sub_nb(p, c_list, nb):
+    poss = deepcopy(p)
+
+    for x, y in c_list:
+        if type(poss[x][y]) is list and poss[x][y] != nb:
+            poss[x][y] = list(set(poss[x][y]) - set(nb))
+
+    return poss
+
+
 def naked_subset(p):
     poss = deepcopy(p)
+
     # For each square
-    print('starting...')
     for i in range(0, 9, 3):
         for j in range(0, 9, 3):
             # We spot any subset
@@ -147,15 +179,7 @@ def naked_subset(p):
                 print(nb, i, j)
             # We remove the numbers in the subset from other positions
             for a in nb:
-                for x, y in square(i, j):
-                    if type(poss[x][y]) is list and poss[x][y] != a:
-                        try:
-                            poss[x][y] = list(set(poss[x][y]) - set(a))
-                        except TypeError:
-                            print(poss[x][y], a, i, j)
-    # print('square')
-    # for i in poss:
-    #     print(i)
+                poss = sub_nb(poss, square(i, j), a)
 
     # For each line
     for i in range(9):
@@ -164,15 +188,7 @@ def naked_subset(p):
             print(nb, i, 0)
         # We remove the numbers in the subset from other positions
         for a in nb:
-            for x, y in line(i, 0):
-                # print('before', poss[x][y])
-                if type(poss[x][y]) is list and poss[x][y] != a:
-                    poss[x][y] = list(set(poss[x][y]) - set(a))
-
-
-    # print('line')
-    # for i in poss:
-    #     print(i)
+            poss = sub_nb(poss, line(i, 0), a)
 
     # For each column
     for j in range(9):
@@ -181,20 +197,14 @@ def naked_subset(p):
             print(nb, 0, j)
         # We remove the numbers in the subset from other positions
         for a in nb:
-            for x, y in column(0, j):
-                if type(poss[x][y]) is list and poss[x][y] != a:
-                    poss[x][y] = list(set(poss[x][y]) - set(a))
-
-    # print('column')
-    # for i in poss:
-    #     print(i)
+            poss = sub_nb(poss, column(0, j), a)
 
     return poss
 
 
 def won(s):
     w = True
-    for i in s:
-        if 0 in i:
+    for l in s:
+        if 0 in l:
             w = False
     return w
