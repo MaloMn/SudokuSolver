@@ -2,6 +2,7 @@ from f_base import won, check, P, possibilities, format_sudoku
 from f_solcan import sole_candidate
 from f_naksub import naked_subset
 from f_unican import unique_candidate
+from copy import deepcopy
 
 sudoku = '900700500000910000640000900570040230000103000064080079009000024000098000008001007'
 
