@@ -1,6 +1,9 @@
-from functions import *
+from f_base import won, check, P, possibilities, format_sudoku
+from f_solcan import sole_candidate
+from f_naksub import naked_subset
+from f_unican import unique_candidate
 
-sudoku = '002080400000409000093000210940000083000578000700040001026000390000605000010000050'
+sudoku = '900700500000910000640000900570040230000103000064080079009000024000098000008001007'
 
 sudoku = format_sudoku(sudoku)
 print(check(sudoku))
